@@ -14,57 +14,64 @@
         <img class="grid-item" src="/img/8638413.jpg" alt="header_background" width="100%">
     </header>
     <div class="container">
-        <h1 class="name_of_web" align = center >Bocchi The Rock Card</h1>
+        <h1 class="name_of_web" align=center>Bocchi The Rock Card</h1>
         <div class="grid-container">
             <div class=box>
                 <h3>Gohto Hitori</h3>
-                <img id="document1" class="grid-item" src="/img/Hitori_Gotoh.jpg" alt="normal Hitori Gohto" style="height: 354px;width: 381px;">
+                <img id="document1" class="grid-item" src="/img/Hitori_Gotoh.jpg" alt="normal Hitori Gohto"
+                    style="height: 354px;width: 381px;">
                 <p>0.002 ETH</p>
-                <button id="hotel1">BUY</button>
+                <button id="btnCharactor1">BUY</button>
             </div>
 
             <div class=box>
                 <h3>Kita Ikuyo</h3>
-                <img id="document1" class="grid-item" src="/img/Ikuyo_Kita.jpg" alt="Hotel Name 2" style="height: 354px;width: 381px;">
-                <p>0.002 ETH</p>
-                <button id="hotel2">BUY</button>
+                <img id="document1" class="grid-item" src="/img/Ikuyo_Kita.jpg" alt="normal Kita Ikuyo"
+                    style="height: 354px;width: 381px;">
+                <p>0.003 ETH</p>
+                <button id="btnCharactor1">BUY</button>
             </div>
 
             <div class=box>
                 <h3>Ijichi Nijika</h3>
-                <img id="document1" class="grid-item" src="/img/Nijika_Ijichi.jpg" alt="Hotel Name 3" style="height: 354px;width: 381px;">
-                <p>0.002 ETH</p>
-                <button id="hotel3">BUY</button>
+                <img id="document1" class="grid-item" src="/img/Nijika_Ijichi.jpg" alt="normal Ijichi Nijika"
+                    style="height: 354px;width: 381px;">
+                <p>0.004 ETH</p>
+                <button id="btnCharactor3">BUY</button>
             </div>
 
 
             <div class=box>
                 <h3>Yamada Ryo</h3>
-                <img id="document1" class="grid-item" src="/img/Ryo_Yamada.jpg" alt="Hotel Name 4" style="height: 354px;width: 381px;">
-                <p>0.002 ETH</p>
-                <button id="hotel4">BUY</button>
+                <img id="document1" class="grid-item" src="/img/Ryo_Yamada.jpg" alt="normal Yamada Ryo"
+                    style="height: 354px;width: 381px;">
+                <p>0.005 ETH</p>
+                <button id="btnCharactor4">BUY</button>
             </div>
 
 
             <div class=box>
                 <h3>Ikuyo SSR</h3>
-                <img id="document1" class="grid-item" src="/img/Ikuyo_SSR.jpg" alt="Hotel Name 5" style="height: 354px;width: 381px;">
-                <p>0.002 ETH</p>
-                <button id="hotel5">BUY</button>
+                <img id="document1" class="grid-item" src="/img/Ikuyo_SSR.jpg" alt="Ikuyo SSR"
+                    style="height: 354px;width: 381px;">
+                <p>0.006 ETH</p>
+                <button id="btnCharactor5">BUY</button>
             </div>
 
             <div class=box>
                 <h3>Hiroi Kikuri</h3>
-                <img id="document1" class="grid-item" src="/img/Kikuri_Hiroi.jpg" alt="Hotel Name 6" style="height: 354px;width: 381px;">
-                <p>0.002 ETH</p>
-                <button id="hotel6">BUY</button>
+                <img id="document1" class="grid-item" src="/img/Kikuri_Hiroi.jpg" alt="Hiroi Kikuri"
+                    style="height: 354px;width: 381px;">
+                <p>0.007 ETH</p>
+                <button id="btnCharactor6">BUY</button>
             </div>
 
             <div class=box>
                 <h3>Ijichi Seika</h3>
-                <img id="document1" class="grid-item" src="/img/Seika_Ijichi.jpg" alt="Hotel Name 6" style="height: 354px;width: 381px;">
-                <p>0.002 ETH</p>
-                <button id="hotel6">BUY</button>
+                <img id="document1" class="grid-item" src="/img/Seika_Ijichi.jpg" alt="Ijichi Seika"
+                    style="height: 354px;width: 381px;">
+                <p>0.008 ETH</p>
+                <button id="btnCharactor7">BUY</button>
             </div>
         </div>
 
@@ -117,7 +124,90 @@
         }
 
         //***std
-        let abi = "";
+        let abi = [
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": false,
+                        "internalType": "address",
+                        "name": "from",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "text",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "bytes32",
+                        "name": "hash",
+                        "type": "bytes32"
+                    }
+                ],
+                "name": "NameAdded",
+                "type": "event"
+            },
+            {
+                "anonymous": false,
+                "inputs": [
+                    {
+                        "indexed": false,
+                        "internalType": "address",
+                        "name": "from",
+                        "type": "address"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "text",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "reason",
+                        "type": "string"
+                    }
+                ],
+                "name": "RegistrationError",
+                "type": "event"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "name",
+                        "type": "string"
+                    }
+                ],
+                "name": "checkName",
+                "outputs": [
+                    {
+                        "internalType": "bool",
+                        "name": "",
+                        "type": "bool"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
+                "inputs": [
+                    {
+                        "internalType": "string",
+                        "name": "name",
+                        "type": "string"
+                    }
+                ],
+                "name": "registration",
+                "outputs": [],
+                "stateMutability": "payable",
+                "type": "function"
+            }
+        ];
 
         //***std
         async function loadContract() {
@@ -159,6 +249,90 @@
                     $('#result').html("Error: " + event.returnValues.text + "<br/>Reason: " + event.returnValues.reason)
                 }
             });
+        });
+
+        $("#btnCharactor1").click(function () {
+            console.log(currentAccount);
+            // //***std
+            web3.contract.methods.registration($("#document1").val())
+                .send({
+                    from: currentAccount
+                    , value: web3.utils.toWei("0.002", "ether")
+                }, function (error, result) {
+                    $("#result").html(result);
+                });
+        });
+
+        $("#btnCharactor2").click(function () {
+            console.log(currentAccount);
+            // //***std
+            web3.contract.methods.registration($("#document1").val())
+                .send({
+                    from: currentAccount
+                    , value: web3.utils.toWei("0.003", "ether")
+                }, function (error, result) {
+                    $("#result").html(result);
+                });
+        });
+
+        $("#btnCharactor3").click(function () {
+            console.log(currentAccount);
+            // //***std
+            web3.contract.methods.registration($("#document1").val())
+                .send({
+                    from: currentAccount
+                    , value: web3.utils.toWei("0.004", "ether")
+                }, function (error, result) {
+                    $("#result").html(result);
+                });
+        });
+
+        $("#btnCharactor4").click(function () {
+            console.log(currentAccount);
+            // //***std
+            web3.contract.methods.registration($("#document1").val())
+                .send({
+                    from: currentAccount
+                    , value: web3.utils.toWei("0.005", "ether")
+                }, function (error, result) {
+                    $("#result").html(result);
+                });
+        });
+
+        $("#btnCharactor5").click(function () {
+            console.log(currentAccount);
+            // //***std
+            web3.contract.methods.registration($("#document1").val())
+                .send({
+                    from: currentAccount
+                    , value: web3.utils.toWei("0.006", "ether")
+                }, function (error, result) {
+                    $("#result").html(result);
+                });
+        });
+
+        $("#btnCharactor6").click(function () {
+            console.log(currentAccount);
+            // //***std
+            web3.contract.methods.registration($("#document1").val())
+                .send({
+                    from: currentAccount
+                    , value: web3.utils.toWei("0.007", "ether")
+                }, function (error, result) {
+                    $("#result").html(result);
+                });
+        });
+
+        $("#btnCharactor7").click(function () {
+            console.log(currentAccount);
+            // //***std
+            web3.contract.methods.registration($("#document1").val())
+                .send({
+                    from: currentAccount
+                    , value: web3.utils.toWei("0.008", "ether")
+                }, function (error, result) {
+                    $("#result").html(result);
+                });
         });
 
         $("#btnCheck").click(function () {
