@@ -1,0 +1,177 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Bocchi The Rock Card</title>
+    <link rel="stylesheet" type="text/css" href="main.css">
+    <!-- <script src="./node_modules/web3/dist/web3.min.js">
+    </script> -->
+    <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
+</head>
+
+<body>
+    <header>
+        <img class="grid-item" src="/img/8638413.jpg" alt="header_background" width="100%">
+    </header>
+    <div class="container">
+        <h1 class="name_of_web" align = center >Bocchi The Rock Card</h1>
+        <div class="grid-container">
+            <div class=box>
+                <h3>Gohto Hitori</h3>
+                <img id="document1" class="grid-item" src="/img/Hitori_Gotoh.jpg" alt="normal Hitori Gohto" style="height: 354px;width: 381px;">
+                <p>0.002 ETH</p>
+                <button id="hotel1">BUY</button>
+            </div>
+
+            <div class=box>
+                <h3>Kita Ikuyo</h3>
+                <img id="document1" class="grid-item" src="/img/Ikuyo_Kita.jpg" alt="Hotel Name 2" style="height: 354px;width: 381px;">
+                <p>0.002 ETH</p>
+                <button id="hotel2">BUY</button>
+            </div>
+
+            <div class=box>
+                <h3>Ijichi Nijika</h3>
+                <img id="document1" class="grid-item" src="/img/Nijika_Ijichi.jpg" alt="Hotel Name 3" style="height: 354px;width: 381px;">
+                <p>0.002 ETH</p>
+                <button id="hotel3">BUY</button>
+            </div>
+
+
+            <div class=box>
+                <h3>Yamada Ryo</h3>
+                <img id="document1" class="grid-item" src="/img/Ryo_Yamada.jpg" alt="Hotel Name 4" style="height: 354px;width: 381px;">
+                <p>0.002 ETH</p>
+                <button id="hotel4">BUY</button>
+            </div>
+
+
+            <div class=box>
+                <h3>Ikuyo SSR</h3>
+                <img id="document1" class="grid-item" src="/img/Ikuyo_SSR.jpg" alt="Hotel Name 5" style="height: 354px;width: 381px;">
+                <p>0.002 ETH</p>
+                <button id="hotel5">BUY</button>
+            </div>
+
+            <div class=box>
+                <h3>Hiroi Kikuri</h3>
+                <img id="document1" class="grid-item" src="/img/Kikuri_Hiroi.jpg" alt="Hotel Name 6" style="height: 354px;width: 381px;">
+                <p>0.002 ETH</p>
+                <button id="hotel6">BUY</button>
+            </div>
+
+            <div class=box>
+                <h3>Ijichi Seika</h3>
+                <img id="document1" class="grid-item" src="/img/Seika_Ijichi.jpg" alt="Hotel Name 6" style="height: 354px;width: 381px;">
+                <p>0.002 ETH</p>
+                <button id="hotel6">BUY</button>
+            </div>
+        </div>
+
+        <label class="col-lg-2 control-label">Status</label>
+        <h2 id="result"></h2>
+        Status: <span id="status">Loading...</span>
+    </div>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js">
+    </script>
+    <script>
+
+        // ===Connecting to MetaMask===
+        function loadWeb3() {
+            if (window.ethereum) {
+                // To get web3(.js) object
+                web3 = new Web3(window.ethereum)
+
+                // To request user's account from Metamask
+                // ***std
+                ethereum
+                    .request({ method: 'eth_requestAccounts' })
+                    .then(handleAccountsChanged)
+                    .catch((err) => {
+                        if (err.code === 4001) {
+                            // If this happens, the user rejected the connection request.
+                            console.log('Please connect to MetaMask.');
+                        } else {
+                            console.error(err);
+                        }
+                    });
+            }
+        }
+
+        // ===Handle user accounts and accountsChanged===
+        let currentAccount = null;
+
+        // Note that this event is emitted on page load.
+        // If the array of accounts is non-empty, you're already connected.
+        window.ethereum.on('accountsChanged', handleAccountsChanged);
+
+        // For now, 'eth_accounts' will continue to always return an array
+        function handleAccountsChanged(accounts) {
+            if (accounts.length === 0) {
+                // MetaMask is locked or the user has not connected any accounts
+                console.log('Please connect to MetaMask.');
+            } else if (accounts[0] !== currentAccount) {
+                currentAccount = accounts[0];
+                //***std
+            }
+        }
+
+        //***std
+        let abi = "";
+
+        //***std
+        async function loadContract() {
+            return await new web3.eth.Contract(abi, '0x6D6Ea799450731F48Fd0D57ce1dA0e9a3071eE51');
+        }
+
+        async function load() {
+            await loadWeb3();
+            web3.contract = await loadContract();
+            updateStatus('Ready!');
+        }
+
+        function updateStatus(status) {
+            const statusEl = document.getElementById('status');
+            statusEl.innerHTML = status;
+            console.log(status);
+        }
+
+        $("#btnRegistration").click(function () {
+            console.log(currentAccount);
+            // //***std
+            web3.contract.methods.registration($("#document1").val())
+                .send({
+                    from: currentAccount
+                    , value: web3.utils.toWei("0.002", "ether")
+                }, function (error, result) {
+                    $("#result").html(result);
+                });
+
+            web3.contract.once('NameAdded', {}, function (error, event) {
+                if (!error) {
+                    console.log(event);
+                    $("#result").html("Name: " + event.returnValues.text + "<br/> Hashed as: " + event.returnValues.hash);
+                }
+            });
+            web3.contract.once('RegistrationError', {}, function (error, event) {
+                if (!error) {
+                    console.log(event);
+                    $('#result').html("Error: " + event.returnValues.text + "<br/>Reason: " + event.returnValues.reason)
+                }
+            });
+        });
+
+        $("#btnCheck").click(function () {
+            web3.contract.methods.checkName($("#document2").val()).call(function (error, result) {
+                if (!error) {
+                    $("#result").html(result.toString());
+                } else
+                    console.error(error);
+            });
+        });
+
+        load();
+    </script>
+</body>
+
+</html>

@@ -1,0 +1,47 @@
+body {
+    background-color:#F0F0F0;
+    padding: 2em;
+    font-family: 'Raleway','Source Sans Pro', 'Arial';
+}
+.container {
+    width: 95%;
+    margin: 0 auto;
+}
+label {
+    display:block;
+    margin-bottom:10px;
+    font-weight: bold;
+}
+input {
+    padding:10px;
+    width: 100%;
+    margin-bottom: 1em;
+}
+button {
+    margin: 2em 0;
+    padding: 1em 4em;
+    display:inline-block;
+    font-size: medium;
+    color: white;
+    background-color: #3A8F7D;
+}
+#result {
+    padding:1em;
+    background-color:#fff;
+    margin: 1em 0;
+    width: 10px;
+}
+.grid-container {
+    display: grid;
+    gap: 25px 50px;
+    grid-template-columns: auto auto auto;
+    padding: 5px;
+}
+p {
+    display: inline-block;
+    margin-right: 8rem;
+}
+
+.name_of_web {
+    position: sticky;
+}
