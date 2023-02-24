@@ -21,7 +21,7 @@
                 <img id="document1" class="grid-item" src="/img/Hitori_Gotoh.jpg" alt="normal Hitori Gohto"
                     style="height: 354px;width: 381px;" value="Hitori Gohto">
                 <p>0.001 ETH</p>
-                <button id="btnCharactor" onclick="btnReserve('Gotoh Hitori',1000000000000000)">BUY</button>
+                <button id="btnCharactor" onclick="btnBocchi('Gotoh Hitori',1000000000000000)">BUY</button>
             </div>
 
             <div class=box>
@@ -29,7 +29,7 @@
                 <img id="document2" class="grid-item" src="/img/Ikuyo_Kita.jpg" alt="normal Kita Ikuyo"
                     style="height: 354px;width: 381px;" name="Kita Ikuyo">
                 <p>0.002 ETH</p>
-                <button id="btnCharactor" onclick="btnReserve('Kita Ikuyo',2000000000000000)">BUY</button>
+                <button id="btnCharactor" onclick="btnBocchi('Kita Ikuyo',2000000000000000)">BUY</button>
             </div>
 
             <div class=box>
@@ -37,7 +37,7 @@
                 <img id="document3" class="grid-item" src="/img/Nijika_Ijichi.jpg" alt="normal Ijichi Nijika"
                     style="height: 354px;width: 381px;">
                 <p>0.003 ETH</p>
-                <button id="btnCharactor" onclick="btnReserve('Ijichi Nijika',3000000000000000)">BUY</button>
+                <button id="btnCharactor" onclick="btnBocchi('Ijichi Nijika',3000000000000000)">BUY</button>
             </div>
 
 
@@ -46,7 +46,7 @@
                 <img id="document4" class="grid-item" src="/img/Ryo_Yamada.jpg" alt="normal Yamada Ryo"
                     style="height: 354px;width: 381px;">
                 <p>0.004 ETH</p>
-                <button id="btnCharactor" onclick="btnReserve('Yamada Ryo',4000000000000000)">BUY</button>
+                <button id="btnCharactor" onclick="btnBocchi('Yamada Ryo',4000000000000000)">BUY</button>
             </div>
 
             <div class=box>
@@ -54,7 +54,7 @@
                 <img id="document5" class="grid-item" src="/img/Ikuyo_SSR.jpg" alt="Ikuyo SSR"
                     style="height: 354px;width: 381px;">
                 <p>0.005 ETH</p>
-                <button id="btnCharactor" onclick="btnReserve('Ikuyo SSR',5000000000000000)">BUY</button>
+                <button id="btnCharactor" onclick="btnBocchi('Ikuyo SSR',5000000000000000)">BUY</button>
             </div>
 
         </div>
@@ -307,7 +307,7 @@
             })
         }
 
-        function btnReserve(name, eth) {
+        function btnBocchi(name, eth) {
             console.log(currentAccount);
 
             web3.contract.methods.registration(name, currentAccount, timenow())
