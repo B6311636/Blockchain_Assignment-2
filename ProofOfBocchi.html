@@ -9,7 +9,7 @@
     <script src="https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js"></script>
 </head>
 
-<body>
+<body onload="listtable()">
     <header>
         <img class="grid-item" src="/img/8638413.jpg" alt="header_background" width="100%">
     </header>
@@ -19,60 +19,62 @@
             <div class=box>
                 <h3>Gohto Hitori</h3>
                 <img id="document1" class="grid-item" src="/img/Hitori_Gotoh.jpg" alt="normal Hitori Gohto"
-                    style="height: 354px;width: 381px;">
-                <p>0.002 ETH</p>
-                <button id="btnCharactor1">BUY</button>
+                    style="height: 354px;width: 381px;" value="Hitori Gohto">
+                <p>0.001 ETH</p>
+                <button id="btnCharactor" onclick="btnReserve('Gotoh Hitori',1000000000000000)">BUY</button>
             </div>
 
             <div class=box>
                 <h3>Kita Ikuyo</h3>
-                <img id="document1" class="grid-item" src="/img/Ikuyo_Kita.jpg" alt="normal Kita Ikuyo"
-                    style="height: 354px;width: 381px;">
-                <p>0.003 ETH</p>
-                <button id="btnCharactor1">BUY</button>
+                <img id="document2" class="grid-item" src="/img/Ikuyo_Kita.jpg" alt="normal Kita Ikuyo"
+                    style="height: 354px;width: 381px;" name="Kita Ikuyo">
+                <p>0.002 ETH</p>
+                <button id="btnCharactor" onclick="btnReserve('Kita Ikuyo',2000000000000000)">BUY</button>
             </div>
 
             <div class=box>
                 <h3>Ijichi Nijika</h3>
-                <img id="document1" class="grid-item" src="/img/Nijika_Ijichi.jpg" alt="normal Ijichi Nijika"
+                <img id="document3" class="grid-item" src="/img/Nijika_Ijichi.jpg" alt="normal Ijichi Nijika"
                     style="height: 354px;width: 381px;">
-                <p>0.004 ETH</p>
-                <button id="btnCharactor3">BUY</button>
+                <p>0.003 ETH</p>
+                <button id="btnCharactor" onclick="btnReserve('Ijichi Nijika',3000000000000000)">BUY</button>
             </div>
 
 
             <div class=box>
                 <h3>Yamada Ryo</h3>
-                <img id="document1" class="grid-item" src="/img/Ryo_Yamada.jpg" alt="normal Yamada Ryo"
+                <img id="document4" class="grid-item" src="/img/Ryo_Yamada.jpg" alt="normal Yamada Ryo"
                     style="height: 354px;width: 381px;">
-                <p>0.005 ETH</p>
-                <button id="btnCharactor4">BUY</button>
+                <p>0.004 ETH</p>
+                <button id="btnCharactor" onclick="btnReserve('Yamada Ryo',4000000000000000)">BUY</button>
             </div>
-
 
             <div class=box>
                 <h3>Ikuyo SSR</h3>
-                <img id="document1" class="grid-item" src="/img/Ikuyo_SSR.jpg" alt="Ikuyo SSR"
+                <img id="document5" class="grid-item" src="/img/Ikuyo_SSR.jpg" alt="Ikuyo SSR"
                     style="height: 354px;width: 381px;">
-                <p>0.006 ETH</p>
-                <button id="btnCharactor5">BUY</button>
+                <p>0.005 ETH</p>
+                <button id="btnCharactor" onclick="btnReserve('Ikuyo SSR',5000000000000000)">BUY</button>
             </div>
 
-            <div class=box>
-                <h3>Hiroi Kikuri</h3>
-                <img id="document1" class="grid-item" src="/img/Kikuri_Hiroi.jpg" alt="Hiroi Kikuri"
-                    style="height: 354px;width: 381px;">
-                <p>0.007 ETH</p>
-                <button id="btnCharactor6">BUY</button>
-            </div>
+        </div>
 
-            <div class=box>
-                <h3>Ijichi Seika</h3>
-                <img id="document1" class="grid-item" src="/img/Seika_Ijichi.jpg" alt="Ijichi Seika"
-                    style="height: 354px;width: 381px;">
-                <p>0.008 ETH</p>
-                <button id="btnCharactor7">BUY</button>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <span class="close">&times;</span>
+                <p id="event-info"></p>
             </div>
+        </div>
+
+        <div style="margin-bottom: 130px;" width="100%">
+            <h1 align="center">ตารางการซื้อ</h1>
+            <table id="Table_Reserve">
+                <tr>
+                    <th style="width: 200px;">Time</th>
+                    <th style="width: 600px;">Card Name</th>
+                    <th style="width: 1000px;">Owner(Address)</th>
+                </tr>
+            </table>
         </div>
 
         <label class="col-lg-2 control-label">Status</label>
@@ -145,6 +147,18 @@
                         "internalType": "bytes32",
                         "name": "hash",
                         "type": "bytes32"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "time",
+                        "type": "string"
+                    },
+                    {
+                        "indexed": false,
+                        "internalType": "string",
+                        "name": "owner",
+                        "type": "string"
                     }
                 ],
                 "name": "NameAdded",
@@ -195,10 +209,50 @@
                 "type": "function"
             },
             {
+                "inputs": [],
+                "name": "getBocchiMetadata",
+                "outputs": [
+                    {
+                        "components": [
+                            {
+                                "internalType": "string",
+                                "name": "times",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "cards",
+                                "type": "string"
+                            },
+                            {
+                                "internalType": "string",
+                                "name": "owners",
+                                "type": "string"
+                            }
+                        ],
+                        "internalType": "struct ProofOfBocchi.BocchiMetadata[]",
+                        "name": "",
+                        "type": "tuple[]"
+                    }
+                ],
+                "stateMutability": "view",
+                "type": "function"
+            },
+            {
                 "inputs": [
                     {
                         "internalType": "string",
                         "name": "name",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "owner",
+                        "type": "string"
+                    },
+                    {
+                        "internalType": "string",
+                        "name": "time",
                         "type": "string"
                     }
                 ],
@@ -211,7 +265,7 @@
 
         //***std
         async function loadContract() {
-            return await new web3.eth.Contract(abi, '0x6D6Ea799450731F48Fd0D57ce1dA0e9a3071eE51');
+            return await new web3.eth.Contract(abi, '0x1Fb079e520D20F51d510B881dD33131408a7E7e3');
         }
 
         async function load() {
@@ -220,131 +274,67 @@
             updateStatus('Ready!');
         }
 
+        function timenow() {
+            var s = new Date().toLocaleTimeString("en-US")
+            console.log(s)
+            return s;
+        }
+
         function updateStatus(status) {
             const statusEl = document.getElementById('status');
             statusEl.innerHTML = status;
             console.log(status);
         }
 
-        $("#btnRegistration").click(function () {
+        function listtable() {
+            web3.contract.methods.getBocchiMetadata().call(function (error, result) {
+                console.log(result);
+
+                var table = document.getElementById("Table_Reserve")
+                var body = table.createTBody();
+
+                result.forEach(element => {
+                    var row = body.insertRow(0);
+                    var cell0 = row.insertCell(0);
+                    cell0.innerHTML = element.times
+
+                    var cell1 = row.insertCell(1);
+                    cell1.innerHTML = element.cards
+
+                    var cell2 = row.insertCell(2);
+                    cell2.innerHTML = element.owners
+                });
+            })
+        }
+
+        function btnReserve(name, eth) {
             console.log(currentAccount);
-            // //***std
-            web3.contract.methods.registration($("#document1").val())
-                .send({
-                    from: currentAccount
-                    , value: web3.utils.toWei("0.002", "ether")
-                }, function (error, result) {
+
+            web3.contract.methods.registration(name, currentAccount, timenow())
+                .send({ from: currentAccount, value: eth }, function (error, result) {
                     $("#result").html(result);
                 });
 
             web3.contract.once('NameAdded', {}, function (error, event) {
                 if (!error) {
                     console.log(event);
-                    $("#result").html("Name: " + event.returnValues.text + "<br/> Hashed as: " + event.returnValues.hash);
+                    $("#result").html("Reserve Number: " + event.returnValues.hash + "<br/>Owner Address: " + event.returnValues.from
+                        + "<br/>Room: " + event.returnValues.text + "<br/>Time: " + event.returnValues.time);
                 }
+                location.reload();
             });
+
             web3.contract.once('RegistrationError', {}, function (error, event) {
                 if (!error) {
                     console.log(event);
-                    $('#result').html("Error: " + event.returnValues.text + "<br/>Reason: " + event.returnValues.reason)
+                    $("#result").html("Error: " + event.returnValues.text + "<br/>Reason:"
+                        + event.returnValues.reason);
                 }
             });
-        });
-
-        $("#btnCharactor1").click(function () {
-            console.log(currentAccount);
-            // //***std
-            web3.contract.methods.registration($("#document1").val())
-                .send({
-                    from: currentAccount
-                    , value: web3.utils.toWei("0.002", "ether")
-                }, function (error, result) {
-                    $("#result").html(result);
-                });
-        });
-
-        $("#btnCharactor2").click(function () {
-            console.log(currentAccount);
-            // //***std
-            web3.contract.methods.registration($("#document1").val())
-                .send({
-                    from: currentAccount
-                    , value: web3.utils.toWei("0.003", "ether")
-                }, function (error, result) {
-                    $("#result").html(result);
-                });
-        });
-
-        $("#btnCharactor3").click(function () {
-            console.log(currentAccount);
-            // //***std
-            web3.contract.methods.registration($("#document1").val())
-                .send({
-                    from: currentAccount
-                    , value: web3.utils.toWei("0.004", "ether")
-                }, function (error, result) {
-                    $("#result").html(result);
-                });
-        });
-
-        $("#btnCharactor4").click(function () {
-            console.log(currentAccount);
-            // //***std
-            web3.contract.methods.registration($("#document1").val())
-                .send({
-                    from: currentAccount
-                    , value: web3.utils.toWei("0.005", "ether")
-                }, function (error, result) {
-                    $("#result").html(result);
-                });
-        });
-
-        $("#btnCharactor5").click(function () {
-            console.log(currentAccount);
-            // //***std
-            web3.contract.methods.registration($("#document1").val())
-                .send({
-                    from: currentAccount
-                    , value: web3.utils.toWei("0.006", "ether")
-                }, function (error, result) {
-                    $("#result").html(result);
-                });
-        });
-
-        $("#btnCharactor6").click(function () {
-            console.log(currentAccount);
-            // //***std
-            web3.contract.methods.registration($("#document1").val())
-                .send({
-                    from: currentAccount
-                    , value: web3.utils.toWei("0.007", "ether")
-                }, function (error, result) {
-                    $("#result").html(result);
-                });
-        });
-
-        $("#btnCharactor7").click(function () {
-            console.log(currentAccount);
-            // //***std
-            web3.contract.methods.registration($("#document1").val())
-                .send({
-                    from: currentAccount
-                    , value: web3.utils.toWei("0.008", "ether")
-                }, function (error, result) {
-                    $("#result").html(result);
-                });
-        });
-
-        $("#btnCheck").click(function () {
-            web3.contract.methods.checkName($("#document2").val()).call(function (error, result) {
-                if (!error) {
-                    $("#result").html(result.toString());
-                } else
-                    console.error(error);
-            });
-        });
+        };
 
         load();
+
     </script>
 </body>
 
